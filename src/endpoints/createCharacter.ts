@@ -1,16 +1,29 @@
 import { Request, Response } from 'express';
-import { characters } from '../data';
+import connection from '../connection';
+// import { characters } from '../data';
 
 
-export default function createCharacter (req:Request, res:Response) {
+export default async function createCharacter (req:Request, res:Response):Promise<void> {
     
-    let {id, name, gender, description} = req.body
+    let {name, gender, description} = req.body
     
-    characters.push({
-        id: Date.now(),
-        name,
-        gender,
-        description
-    })
-    res.status(200).send("Personagem Adicionado")
+        try{
+            await connection("character")
+            .insert({name, gender, description})
+
+            res.status(200).send("Personagem criado")
+        }
+
+        catch(error){
+            res.status(500).send("Erro inesperado")
+
+        }
+
+    // characters.push({
+    //     id: Date.now(),
+    //     name,
+    //     gender,
+    //     description
+    // })
+    
 }
