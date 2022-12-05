@@ -1,12 +1,17 @@
 GET http://localhost:3003/character
 
-#####
+####
 
 PUT http://localhost:3003/character
 content-type: application/json
 
 {
-    "name": "Juggernaut",
+    "name": "Deadpool",
     "gender": "MALE",
-    "description": "Irmão do professor Xavier"
+    "description": "Sexy Motherf***"
 }
+
+####
+
+
+DELETE http://localhost:3003/character/10
